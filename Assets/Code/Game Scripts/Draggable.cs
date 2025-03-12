@@ -9,9 +9,9 @@ public class Draggable: MonoBehaviour
 {
     //public Application application;
     public Transform trans;
-    public GameObject canvas;
- 
-    private bool isDragging = true;
+    //public GameObject canvas;
+
+    public bool isDragging = true;
 
     public void StartDragging()
     {
@@ -23,11 +23,11 @@ public class Draggable: MonoBehaviour
         if (isDragging)
         {
             trans.position = GetMousePosition();
-            canvas.SetActive(false);
+            //canvas.SetActive(false);
         }
         else
         {
-            canvas.SetActive(true);
+            //canvas.SetActive(true);
         }
     }
 

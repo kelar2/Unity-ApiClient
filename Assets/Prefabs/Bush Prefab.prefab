@@ -138,6 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaddfa748d58fc4d86399fe09ac12b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  application: {fileID: 0}
   trans: {fileID: 1282634709129775937}
   canvas: {fileID: 0}
+  isDragging: 1

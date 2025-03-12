@@ -9,7 +9,7 @@ public class Object2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> ReadObject2Ds(string environmentId)
     {
-        string route = "/object2d/" + environmentId + "/objects";
+        string route = "/object2d/" + environmentId;
 
         IWebRequestReponse webRequestResponse = await webClient.SendGetRequest(route);
         return ParseObject2DListResponse(webRequestResponse);
@@ -55,6 +55,7 @@ public class Object2DApiClient : MonoBehaviour
                 Debug.Log("Response data raw: " + data.Data);
                 List<Object2D> environments = JsonHelper.ParseJsonArray<Object2D>(data.Data);
                 WebRequestData<List<Object2D>> parsedData = new WebRequestData<List<Object2D>>(environments);
+                Debug.Log("Parsed data: " + parsedData.Data);
                 return parsedData;
             default:
                 return webRequestResponse;

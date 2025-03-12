@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -33,9 +34,10 @@ public class Application : MonoBehaviour
 
     public InputHandler inputHandler;
 
-    public PrefabInstantiator prefabInstantiator;
+    public PrefabLoader prefabLoader;
 
     public List<Environment2D> environmentList;
+    public List<Object2D> objectList;
     public int buttonNumber;
     public string loadedWorldId;
 
@@ -288,9 +290,9 @@ public class Application : MonoBehaviour
 
     #region Object2D
 
-    public async void ReadObject2Ds()
+    public async Task ReadObject2Ds()
     {
-        IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(object2D.environmentId);
+        IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(loadedWorldId);
 
         switch (webRequestResponse)
         {
@@ -299,8 +301,9 @@ public class Application : MonoBehaviour
                 Debug.Log("List of object2Ds: " + object2Ds);
                 foreach(Object2D object2D in object2Ds)
                 {
-                    Debug.Log(object2D.id);
-                    //prefabInstantiator.
+                    //Debug.Log(object2D);
+                    //objectList.Add(object2D);
+                    prefabLoader.LoadPrefab(object2D);
                 }
                 
                 // TODO: Succes scenario. Show the enviroments in the UI
@@ -346,6 +349,7 @@ public class Application : MonoBehaviour
             case WebRequestData<string> dataResponse:
                 string responseData = dataResponse.Data;
                 // TODO: Handle succes scenario.
+
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
