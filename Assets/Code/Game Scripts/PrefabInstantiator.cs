@@ -12,7 +12,7 @@ public class PrefabInstantiator : MonoBehaviour
         //application = new Application();
         GameObject instanceOfPrefab = Instantiate(prefab, spawnposition, Quaternion.identity);
         Draggable draggable = instanceOfPrefab.GetComponent<Draggable>();
-        //draggable.canvas = canvas;
+        draggable.canvas = canvas;
         Object2D createdObject = new Object2D();
         createdObject.prefabId = prefab.name;
         createdObject.positionX = spawnposition.x;
@@ -21,7 +21,7 @@ public class PrefabInstantiator : MonoBehaviour
         createdObject.scaleY = prefab.transform.localScale.y;
         createdObject.rotationZ = prefab.transform.rotation.eulerAngles.z;
         createdObject.sortingLayer = 0;
-        application.CreateObject2D(createdObject);
+        application.object2D = createdObject;
     }
 
     //public void SetPrefab(GameObject SetPrefab)

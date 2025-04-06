@@ -7,9 +7,8 @@ using UnityEngine;
 */
 public class Draggable: MonoBehaviour
 {
-    //public Application application;
     public Transform trans;
-    //public GameObject canvas;
+    public GameObject canvas;
 
     public bool isDragging = true;
 
@@ -23,22 +22,26 @@ public class Draggable: MonoBehaviour
         if (isDragging)
         {
             trans.position = GetMousePosition();
-            //canvas.SetActive(false);
+            canvas.SetActive(false);
         }
         else
         {
-            //canvas.SetActive(true);
+            canvas.SetActive(true);
         }
     }
 
     private void OnMouseUpAsButton()
     {
-        isDragging = !isDragging;
+        Application application = FindFirstObjectByType<Application>();
 
-        if (!isDragging)
+        if (isDragging)
         {
             // Stopped dragging. Add any logic here that you need for this scenario.
-            //application.UpdateObject2D();
+            application.object2D.positionX = trans.position.x;
+            application.object2D.positionY = trans.position.y;
+
+            application.CreateObject2D(application.object2D);
+            isDragging = false;
         }
     }
 
